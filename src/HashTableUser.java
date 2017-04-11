@@ -1,7 +1,7 @@
 /**
  * Created by Andrew on 4/5/17.
  */
-public class Main {
+public class HashTableUser {
     public static void main(String[] args) {
 
         //create our temporary number storage
@@ -14,22 +14,28 @@ public class Main {
 
         ChainedHashingHashTable chainedHashingHashTable = new ChainedHashingHashTable(31);
         LinearProbingHashTable linearProbingHashTable = new LinearProbingHashTable(101);
-
+        QuadraticProbingHashTable quadraticProbingHashTable = new QuadraticProbingHashTable(101);
         for(int i = 0; i < 75; i++){
             chainedHashingHashTable.insert(numbers[i]);
             linearProbingHashTable.insert(numbers[i]);
+            quadraticProbingHashTable.insert(numbers[i]);
         }
         System.out.println("Collisions:");
-        System.out.println("Linear: "+linearProbingHashTable.numberOfCollisions);
-        System.out.println("Chained: "+chainedHashingHashTable.numberOfCollisions);
+        System.out.println("Linear: "+linearProbingHashTable.getNumberOfCollisions());
+        System.out.println("Quadratic: "+quadraticProbingHashTable.getNumberOfCollisions());
+        System.out.println("Chained: "+chainedHashingHashTable.getNumberOfCollisions());
+
         System.out.println("\n\n");
         for(int i = 0; i < 75; i++){
             chainedHashingHashTable.search(numbers[i]);
             linearProbingHashTable.search(numbers[i]);
+            quadraticProbingHashTable.search(numbers[i]);
         }
 
         System.out.println("Collisions:");
-        System.out.println("Linear: "+linearProbingHashTable.numberOfCollisions);
-        System.out.println("Chained: "+chainedHashingHashTable.numberOfCollisions);
+        System.out.println("Linear: "+linearProbingHashTable.getNumberOfCollisions());
+        System.out.println("Quadratic: "+quadraticProbingHashTable.getNumberOfCollisions());
+        System.out.println("Chained: "+chainedHashingHashTable.getNumberOfCollisions());
+
     }
 }

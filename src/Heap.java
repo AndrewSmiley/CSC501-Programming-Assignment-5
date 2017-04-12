@@ -51,6 +51,7 @@ public class Heap {
      */
     public int delete(){
 
+
         int tempHead = heap[0];//temporarily store the head item
         heap[0] = heap[size-1]; //then replace it with the last element in the heap
         int root =0; //mark the root of the heap
@@ -81,7 +82,8 @@ public class Heap {
                 //update the root, left and right nodes
                 root = 2 * root + 2;
                 left = 2 * root + 1;
-                right = left + 1;  }
+                right = left + 1;
+            }
         }
         //decrement size
         //return the old head
@@ -90,10 +92,42 @@ public class Heap {
 
     }
 
+    public int heapDelete( )  {
+        int temp = heap[capacity-size];
+        heapRebuild(heap, 0, size);
+        size--;
+        return temp;
+    }
+
+    public void heapRebuild(Integer array[], int root, int n)  {
+        if(root<n/2)  {
+            int left = 2 * root + 1;
+            int right = left + 1;
+            int temp;
+            if(array[root] < Math.min(array[left],
+                    array[right])) {
+                if(array[left] > array[right] ){
+                    temp = heap[root];
+                    heap[root] = heap[left];
+                    heap[left] = temp;
+//                    swap(array[root], array[left];
+                    root = left;
+                }  else  {
+                    //otherwise, we need to swap the root and left nodes
+                    temp = heap[root];
+                    heap[root] = heap[right];
+                    heap[right] = temp;
+                    root = right;
+                }
+                heapRebuild(array, root, n);
+            }
+        }
+    }
+
     /**
      * This is our method to check if our heap is empty or not. Basically one simple line, return true if the size of hte
      * heap is > 0, false otherwise
      * @return boolean t true if the size of the heap is > 0, false otherwise
      */
-    public boolean isEmpty(){ return this.size  > 0;}
+    public boolean isEmpty(){ return this.size  == 0;}
 }
